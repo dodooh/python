@@ -8,8 +8,8 @@ def update_rtstring(keyword,rt_strg='',user_guess =''):
         puzzle = ('_'*len(keyword))
     else: 
         for i in range(len(keyword)):
-            if user_guess == keyword[i] or user_guess ==keyword[i].lower():
-                puzzle = puzzle[:i] +keyword[i]+ puzzle[i+1:]
+            if user_guess == keyword[i]:
+                puzzle = puzzle[:i] + keyword[i] + puzzle[i+1:]
     return puzzle
 
 def update_letter_left(rt_string):
@@ -40,10 +40,10 @@ while user_input == 'Y':
     print(keyword)
     rt_string = update_rtstring(keyword)
     letter_left = len(keyword)
-    print(" ".join(rt_string)+f" {letter_left} letter(s) left")
     guessed = ''
     guess_count = GUESS_TIMES
-    letter_left = len(keyword)
+    print(" ".join(rt_string)+f''' {letter_left} letter(s) left
+    You have {guess_count} guess(es) left.''')
     while ((letter_left != 0) and (guess_count != 0)):
         user_guess = input('Your guess? ')
         if user_guess in guessed:
@@ -52,9 +52,9 @@ while user_input == 'Y':
         elif user_guess in keyword:
             guessed +=user_guess
             rt_string = update_rtstring(keyword,rt_string,user_guess)
+            letter_left = update_letter_left(rt_string)
             print(" ".join(rt_string)+f''' {letter_left} letter(s) left
             You have {guess_count} guess(es) left.''')
-            letter_left = update_letter_left(rt_string)
         else:
             guessed +=user_guess
             guess_count -= 1
