@@ -31,19 +31,23 @@ for line in reader:
     num = int(line[1])
     datasets.append([word,num])
 # play game
-GUESS_TIMES = 10
-print("Welcome to HANGMAN ")
+GUESS_TIMES = 10 # You have 10 time guess wrong
+print("----------Welcome to HANGMAN---------- ")
 user_input = input('Are you ready? (Y/N) ')
-while user_input == 'Y':    
+while user_input == 'Y':   
+    #generate keyword from datasets
     randset = random.choice(datasets)
     keyword = randset[0]
-    print(keyword)
+    print(keyword) 
+    #create realtime puzzle contains a set of underscore '_'
     rt_string = update_rtstring(keyword)
-    letter_left = len(keyword)
-    guessed = ''
-    guess_count = GUESS_TIMES
+    letter_left = len(keyword) #Count the leftover letters
+    guessed = ''#Each guess of user will add to this string to check if they've already guess.
+    guess_count = GUESS_TIMES 
+    # Add space for clear visualization
     print(" ".join(rt_string)+f''' {letter_left} letter(s) left
     You have {guess_count} guess(es) left.''')
+
     while ((letter_left != 0) and (guess_count != 0)):
         user_guess = input('Your guess? ')
         if user_guess in guessed:
